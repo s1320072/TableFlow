@@ -59,3 +59,7 @@ Add or update tests for:
 - [cite_start]Table booking availability validation (preventing double-bookings) [cite: 15, 23]
 - [cite_start]Alternative timeslot auto-suggestions [cite: 16]
 - [cite_start]Reservation database storage records and API shapes [cite: 18, 20]
+
+## Troubleshooting & Tool Constraints
+- Since OpenCode/OpenSpec CLI throws execution errors (`Killed: 9` on university Mac and `bash not found` / `404` on Windows PowerShell), do not rely on CLI automation for scaffolding.
+- Manually create database schemas in `reservations/models.py` and document them under `specs/db_schema.md`.
