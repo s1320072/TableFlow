@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head><title>Reservations</title></head>
+<body>
+<h1>Reservations</h1>
+<ul>
+{% for r in reservations %}
+  <li>{{ r.customer_name }} &mdash; {{ r.num_guests }} guests, Table {{ r.table_number }}, {{ r.time }} ({{ r.status }})</li>
+{% empty %}
+  <li>No reservations.</li>
+{% endfor %}
+</ul>
+<a href="{% url 'reservation-form' %}">New Reservation</a> |
+<a href="{% url 'home' %}">Home</a>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head><title>Confirmation</title></head>
+<body>
+<h1>Reservation Submitted (Stub)</h1>
+<ul>
+  <li>Name: {{ data.customer_name }}</li>
+  <li>Guests: {{ data.num_guests }}</li>
+  <li>Time: {{ data.reservation_time }}</li>
+</ul>
+<p><em>Processing not yet implemented — this is a stub.</em></p>
+<a href="{% url 'reservation-list' %}">View Reservations</a> |
+<a href="{% url 'home' %}">Home</a>
+</body>
+</html>

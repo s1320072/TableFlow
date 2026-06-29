@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head><title>TableFlow - Home</title></head>
+<body>
+<h1>Welcome to TableFlow</h1>
+<p>Server time: {{ now }}</p>
+<ul>
+  <li><a href="{% url 'reservation-list' %}">View Reservations</a></li>
+  <li><a href="{% url 'reservation-form' %}">New Reservation</a></li>
+</ul>
+</body>
+</html>
