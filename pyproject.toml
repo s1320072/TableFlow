@@ -4,19 +4,28 @@ version = "0.1.0"
 description = "TableFlow: A Smart Restaurant Reservation System"
 readme = "README.md"
 requires-python = ">=3.14"
-dependencies = []
+dependencies = [
+    "django>=5.2.2",
+    "djangorestframework>=3.16.0",
+    "django-cors-headers>=4.7.0",
+]
 
 [dependency-groups]
 dev = [
     "pytest>=9.1.1",
     "pytest-cov>=7.1.0",
+    "pytest-django>=4.11.1",
     "ruff>=0.15.18",
 ]
-
-[tool.ruff]
-line-length = 88
-select = ["E", "F", "I"]
 
 [tool.pytest.ini_options]
 addopts = "--cov=. --cov-report=term-missing"
 testpaths = ["tests"]
+DJANGO_SETTINGS_MODULE = "config.settings"
+
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+per-file-ignores = {"apps/reservations/migrations/*" = ["E501"]}
