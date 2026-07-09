@@ -3,11 +3,24 @@
 <head><title>New Reservation</title></head>
 <body>
 <h1>New Reservation</h1>
-<form method="post" action="{% url 'process-reservation' %}">
+<form method="post">
   {% csrf_token %}
-  <p><label>Name: <input type="text" name="customer_name" required></label></p>
-  <p><label>Guests: <input type="number" name="num_guests" min="1" required></label></p>
-  <p><label>Date/Time: <input type="datetime-local" name="reservation_time" required></label></p>
+  {% if form.non_field_errors %}
+    <ul>
+      {% for error in form.non_field_errors %}
+        <li>{{ error }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+  {% for field in form %}
+    <p>
+      <label>{{ field.label }}:</label>
+      {{ field }}
+      {% if field.errors %}
+        <span>{{ field.errors }}</span>
+      {% endif %}
+    </p>
+  {% endfor %}
   <button type="submit">Submit</button>
 </form>
 <a href="{% url 'home' %}">Home</a>

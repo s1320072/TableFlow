@@ -2,13 +2,14 @@
 <html>
 <head><title>Confirmation</title></head>
 <body>
-<h1>Reservation Submitted (Stub)</h1>
+<h1>Reservation Confirmed</h1>
 <ul>
-  <li>Name: {{ data.customer_name }}</li>
-  <li>Guests: {{ data.num_guests }}</li>
-  <li>Time: {{ data.reservation_time }}</li>
+  <li>Name: {{ reservation.customer_name }}</li>
+  <li>Guests: {{ reservation.num_guests }}</li>
+  <li>Table: {{ reservation.table.table_number }} ({{ reservation.table.capacity }} seats)</li>
+  <li>Time: {{ reservation.reservation_time }}</li>
+  <li>Status: {{ reservation.get_status_display }}</li>
 </ul>
-<p><em>Processing not yet implemented — this is a stub.</em></p>
 <a href="{% url 'reservation-list' %}">View Reservations</a> |
 <a href="{% url 'home' %}">Home</a>
 </body>

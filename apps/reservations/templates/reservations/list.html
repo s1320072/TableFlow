@@ -5,7 +5,7 @@
 <h1>Reservations</h1>
 <ul>
 {% for r in reservations %}
-  <li>{{ r.customer_name }} &mdash; {{ r.num_guests }} guests, Table {{ r.table_number }}, {{ r.time }} ({{ r.status }})</li>
+  <li>{{ r.customer_name }} &mdash; {{ r.num_guests }} guests, Table {{ r.table.table_number }}, {{ r.reservation_time }} ({{ r.get_status_display }})</li>
 {% empty %}
   <li>No reservations.</li>
 {% endfor %}
