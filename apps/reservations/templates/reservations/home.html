@@ -1,12 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head><title>TableFlow - Home</title></head>
-<body>
-<h1>Welcome to TableFlow</h1>
-<p>Server time: {{ now }}</p>
-<ul>
-  <li><a href="{% url 'reservation-list' %}">View Reservations</a></li>
-  <li><a href="{% url 'reservation-form' %}">New Reservation</a></li>
-</ul>
-</body>
-</html>
+{% extends "reservations/base.html" %}
+
+{% block title %}TableFlow - Home{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-8 text-center">
+    <div class="card shadow-sm">
+      <div class="card-body p-5">
+        <h1 class="display-5 fw-bold text-primary mb-3">Welcome to TableFlow</h1>
+        <p class="lead text-muted mb-4">Smart restaurant table management made simple.</p>
+        <p class="text-secondary small mb-4">Server time: {{ now }}</p>
+        <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
+          <a href="{% url 'reservation-list' %}" class="btn btn-outline-primary btn-lg px-4">View Reservations</a>
+          <a href="{% url 'reservation-form' %}" class="btn btn-primary btn-lg px-4">New Reservation</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

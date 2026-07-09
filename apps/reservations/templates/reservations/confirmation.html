@@ -1,16 +1,45 @@
-<!DOCTYPE html>
-<html>
-<head><title>Confirmation</title></head>
-<body>
-<h1>Reservation Confirmed</h1>
-<ul>
-  <li>Name: {{ reservation.customer_name }}</li>
-  <li>Guests: {{ reservation.num_guests }}</li>
-  <li>Table: {{ reservation.table.table_number }} ({{ reservation.table.capacity }} seats)</li>
-  <li>Time: {{ reservation.reservation_time }}</li>
-  <li>Status: {{ reservation.get_status_display }}</li>
-</ul>
-<a href="{% url 'reservation-list' %}">View Reservations</a> |
-<a href="{% url 'home' %}">Home</a>
-</body>
-</html>
+{% extends "reservations/base.html" %}
+
+{% block title %}Confirmation{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-6 col-md-8">
+    <div class="card shadow-sm">
+      <div class="card-header bg-success text-white">
+        <h2 class="h5 mb-0">Reservation Confirmed</h2>
+      </div>
+      <div class="card-body">
+        <table class="table table-borderless mb-0">
+          <tbody>
+            <tr>
+              <th class="ps-0 w-25" scope="row">Name</th>
+              <td>{{ reservation.customer_name }}</td>
+            </tr>
+            <tr>
+              <th class="ps-0" scope="row">Guests</th>
+              <td>{{ reservation.num_guests }}</td>
+            </tr>
+            <tr>
+              <th class="ps-0" scope="row">Table</th>
+              <td>{{ reservation.table.table_number }} ({{ reservation.table.capacity }} seats)</td>
+            </tr>
+            <tr>
+              <th class="ps-0" scope="row">Time</th>
+              <td>{{ reservation.reservation_time }}</td>
+            </tr>
+            <tr>
+              <th class="ps-0" scope="row">Status</th>
+              <td><span class="badge bg-success">{{ reservation.get_status_display }}</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="mt-3 d-flex gap-2">
+      <a href="{% url 'reservation-list' %}" class="btn btn-primary">View Reservations</a>
+      <a href="{% url 'home' %}" class="btn btn-outline-secondary">Back to Home</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

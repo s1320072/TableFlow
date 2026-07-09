@@ -9,14 +9,21 @@ class ReservationForm(forms.ModelForm):
         queryset=Table.objects.filter(is_active=True),
         empty_label="テーブルを選択してください",
         label="テーブル",
+        widget=forms.Select(attrs={"class": "form-select"}),
     )
 
     class Meta:
         model = Reservation
         fields = ["customer_name", "num_guests", "reservation_time", "table"]
         widgets = {
+            "customer_name": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Your name"}
+            ),
+            "num_guests": forms.NumberInput(
+                attrs={"class": "form-control", "placeholder": "Number of guests"}
+            ),
             "reservation_time": forms.DateTimeInput(
-                attrs={"type": "datetime-local"},
+                attrs={"type": "datetime-local", "class": "form-control"},
                 format="%Y-%m-%dT%H:%M",
             ),
         }
