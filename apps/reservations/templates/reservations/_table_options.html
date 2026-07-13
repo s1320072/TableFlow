@@ -1,0 +1,4 @@
+<option value="">テーブルを選択してください</option>
+{% for table in tables %}
+  <option value="{{ table.pk }}">{{ table.table_number }} ({{ table.capacity }} seats)</option>
+{% endfor %}

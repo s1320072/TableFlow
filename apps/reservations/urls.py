@@ -8,4 +8,9 @@ urlpatterns = [
     path("reservations/new/", views.reservation_form, name="reservation-form"),
     path("reservations/<int:pk>/", views.confirmation, name="confirmation"),
     path("redirect/", views.redirect_page, name="redirect-page"),
+    path(
+        "available-tables-partial/",
+        views.available_tables_partial,
+        name="available-tables-partial",
+    ),
 ]
