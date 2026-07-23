@@ -17,3 +17,17 @@ To set up the development environment, ensure you have `uv` installed, then run:
 ```bash
 uv venv
 uv sync
+```
+
+## Deployment
+To deploy the application in production:
+
+1. **Collect static files:**
+```bash
+uv run python manage.py collectstatic --noinput
+```
+
+2. **Run the server with Waitress:**
+```bash
+uv run waitress-serve --host=0.0.0.0 --port=8000 config.wsgi:application
+```
