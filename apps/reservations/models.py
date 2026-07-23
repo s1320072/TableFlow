@@ -6,6 +6,10 @@ class Table(models.Model):
     capacity = models.PositiveIntegerField()
     is_active = models.BooleanField(default=True)
 
+    class Meta:
+        # 1. capacity(定員)の昇順、2. table_number(テーブル番号)の昇順 で並び替え
+        ordering = ["capacity", "table_number"]
+
     def __str__(self):
         return f"Table {self.table_number} ({self.capacity} seats)"
 
