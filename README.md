@@ -19,6 +19,18 @@ uv venv
 uv sync
 ```
 
+## Testing
+To run the test suite and check coverage:
+```bash
+uv run pytest
+```
+This executes all tests and displays a coverage report in the terminal.
+
+To run a specific test file:
+```bash
+uv run pytest apps/reservations/tests/test_models.py
+```
+
 ## Deployment
 To deploy the application in production:
 
