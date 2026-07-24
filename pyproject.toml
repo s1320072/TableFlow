@@ -22,7 +22,7 @@ dev = [
 
 [tool.pytest.ini_options]
 addopts = "--cov=. --cov-report=term-missing"
-testpaths = ["tests"]
+testpaths = ["apps", "tests"]
 DJANGO_SETTINGS_MODULE = "config.settings"
 
 [tool.ruff]

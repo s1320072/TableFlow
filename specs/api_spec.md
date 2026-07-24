@@ -12,32 +12,40 @@ All endpoints are mounted under `/reservations/` in `config/urls.py` and render 
 - **Return value**: Rendered HTML page with current server time (`now`)
 
 ### 2. List of reservations
-- **URL**: `/reservations/reservations/`
+- **URL**: `/reservations/list/`
 - **View function**: `apps.reservations.views.reservation_list`
 - **Template**: `reservations/list.html`
 - **Arguments**: none
-- **Return value**: Rendered HTML page with a `reservations` context variable (list of dicts)
+- **Return value**: Rendered HTML page with a `reservations` context variable (queryset of `Reservation` objects)
 
 ### 3. Reservation form page
-- **URL**: `/reservations/reservations/new/`
+- **URL**: `/reservations/new/`
 - **View function**: `apps.reservations.views.reservation_form`
 - **Template**: `reservations/form.html`
 - **Arguments**: none
-- **Return value**: Rendered HTML page with a `<form>` (POSTs to `process-reservation`)
+- **Return value** (GET): Rendered HTML page with an empty `ReservationForm`
+- **Return value** (POST): On valid submission, saves the reservation and redirects to the confirmation page. On invalid submission, re-renders the form with validation errors.
 
-### 4. Process reservation (stub)
-- **URL**: `/reservations/reservations/process/`
-- **View function**: `apps.reservations.views.process_reservation`
+> **Note**: Reservation creation is handled via POST on this endpoint. There is no separate `process` endpoint.
+
+### 4. Confirmation page
+- **URL**: `/reservations/<pk>/`
+- **View function**: `apps.reservations.views.confirmation`
 - **Template**: `reservations/confirmation.html`
-- **Arguments** (POST):
-  - `customer_name` (string)
-  - `num_guests` (integer)
-  - `reservation_time` (datetime string)
-- **Return value** (POST): Rendered confirmation HTML page with submitted data
-- **Return value** (GET): Redirect to `reservation-form`
+- **Arguments**: `pk` (integer, path parameter)
+- **Return value**: Rendered HTML confirmation page with `reservation` context variable (the created `Reservation` object, with related `table` eagerly loaded)
 
 ### 5. Redirect page
 - **URL**: `/reservations/redirect/`
 - **View function**: `apps.reservations.views.redirect_page`
 - **Arguments**: none
 - **Return value**: HTTP 302 redirect to `reservation-list`
+
+### 6. Available tables partial (HTMX)
+- **URL**: `/reservations/available-tables-partial/`
+- **View function**: `apps.reservations.views.available_tables_partial`
+- **Template**: `reservations/_table_options.html`
+- **Arguments** (GET query string):
+  - `reservation_time` (datetime string, optional) — filters out tables booked at that time
+  - `num_guests` (integer string, optional) — filters tables to those with `capacity >= num_guests`
+- **Return value**: Rendered HTML fragment with `tables` context variable (queryset of active, matching `Table` objects)
