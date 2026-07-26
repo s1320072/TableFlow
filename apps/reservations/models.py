@@ -7,7 +7,6 @@ class Table(models.Model):
     is_active = models.BooleanField(default=True)
 
     class Meta:
-        # 1. capacity(定員)の昇順、2. table_number(テーブル番号)の昇順 で並び替え
         ordering = ["capacity", "table_number"]
 
     def __str__(self):
@@ -16,9 +15,9 @@ class Table(models.Model):
 
 class Reservation(models.Model):
     STATUS_CHOICES = [
-        ("PENDING", "承認待ち"),
-        ("CONFIRMED", "予約確定"),
-        ("CANCELLED", "キャンセル"),
+        ("PENDING", "Pending"),
+        ("CONFIRMED", "Confirmed"),
+        ("CANCELLED", "Cancelled"),
     ]
     customer_name = models.CharField(max_length=100)
     num_guests = models.PositiveIntegerField()

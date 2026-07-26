@@ -18,11 +18,11 @@ Main apps:
 
 ## Commands
 
-- Run server: `python manage.py runserver`
+- Run local server: `uv run python manage.py runserver`
 - Run tests and check coverage: `uv run pytest`
 - Lint and format code: `uv run ruff check` / `uv run ruff format`
-- Create migrations: `python manage.py makemigrations`
-- Apply migrations: `python manage.py migrate`
+- Create migrations: `uv run python manage.py makemigrations`
+- Apply migrations: `uv run python manage.py migrate`
 
 ## Things that are easy to break
 

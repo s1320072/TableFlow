@@ -8,8 +8,8 @@ from .models import Reservation, Table
 class ReservationForm(forms.ModelForm):
     table = forms.ModelChoiceField(
         queryset=Table.objects.filter(is_active=True),
-        empty_label="テーブルを選択してください",
-        label="テーブル",
+        empty_label="Select a table",
+        label="Table",
         widget=forms.Select(
             attrs={
                 "class": "form-select",
@@ -57,7 +57,7 @@ class ReservationForm(forms.ModelForm):
     def clean_reservation_time(self):
         reservation_time = self.cleaned_data["reservation_time"]
         if reservation_time < timezone.now():
-            raise forms.ValidationError("過去の日時は予約できません。")
+            raise forms.ValidationError("Cannot book a reservation in the past.")
         return reservation_time
 
     def clean(self):
@@ -68,8 +68,8 @@ class ReservationForm(forms.ModelForm):
         if num_guests and table and num_guests > table.capacity:
             self.add_error(
                 "num_guests",
-                f"テーブル {table.table_number} の収容人数は"
-                f" {table.capacity} 名までです。",
+                f"Table {table.table_number} can accommodate"
+                f" up to {table.capacity} guests.",
             )
 
         reservation_time = cleaned_data.get("reservation_time")
@@ -81,6 +81,8 @@ class ReservationForm(forms.ModelForm):
             if self.instance.pk:
                 conflicts = conflicts.exclude(pk=self.instance.pk)
             if conflicts.exists():
-                raise forms.ValidationError("このテーブルは既に予約されています。")
+                raise forms.ValidationError(
+                    "This table is already reserved for the selected time."
+                )
 
         return cleaned_data
